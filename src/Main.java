@@ -30,7 +30,6 @@ public class Main {
     }
 
     // --------------------- TESTES --------------------------
-
     private static void testarFirstFit() {
         Memoria memoria = new Memoria(16);
 
@@ -57,7 +56,6 @@ public class Main {
     private static void testarBestFit() {
         Memoria memoria = new Memoria(30);
 
-        // Cria blocos livres de tamanhos diferentes
         System.out.println("IN(A,4)");
         Politicas.bestFit(memoria, "A", 4);  // Ocupa 4 → sobra 26
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
@@ -74,9 +72,6 @@ public class Main {
         Politicas.bestFit(memoria, "D", 6);  // Ocupa 6 → sobra 4
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
 
-        // Agora o estado é:
-        // | A:4 | B:6 | C:10 | D:6 | 4 |
-
         System.out.println("OUT(B)");
         memoria.liberarProcesso("B"); // bloco LIVRE 6
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
@@ -84,9 +79,6 @@ public class Main {
         System.out.println("OUT(D)");
         memoria.liberarProcesso("D"); // bloco LIVRE 6
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
-
-        // Estado agora:
-        // LIVRE 6 | OCUPADO 10 | LIVRE 6 | LIVRE 4
 
         System.out.println("IN(X,5) -- BEST-FIT deve escolher o bloco LIVRE de tamanho 6");
         Politicas.bestFit(memoria, "X", 5);
@@ -112,7 +104,6 @@ public class Main {
         Politicas.worstFit(memoria, "D", 2);  // ocupa 2 → sobra 14
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
 
-        // Agora temos ao liberar alguns processos blocos livres de diferentes tamanhos
         System.out.println("OUT(A)  // libera bloco LIVRE de 3");
         memoria.liberarProcesso("A");
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
@@ -121,7 +112,6 @@ public class Main {
         memoria.liberarProcesso("C");
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
 
-        // Cenário agora deve conter blocos livres de tamanhos diferentes
         System.out.println("IN(X,7) -- Deve alocar no MAIOR bloco livre (Worst-Fit)");
         Politicas.worstFit(memoria, "X", 7);
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
@@ -154,7 +144,6 @@ public class Main {
         Politicas.circularFit(memoria, "D", 2);
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
 
-
         System.out.println("\n=======================================");
         System.out.println("TESTE 2 — Circularidade (ponteiro dá a volta)");
         System.out.println("=======================================");
@@ -171,7 +160,6 @@ public class Main {
         Politicas.circularFit(memoria, "F", 4);
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
 
-
         System.out.println("\n=======================================");
         System.out.println("TESTE 3 — Teste de divisão pós circularidade");
         System.out.println("=======================================");
@@ -183,7 +171,6 @@ public class Main {
         System.out.println("IN(G,2) — deve dividir bloco e apontar corretamente");
         Politicas.circularFit(memoria, "G", 2);
         Visualizacao.imprimirEstadoMemoria(memoria.getSegmentos());
-
 
         System.out.println("\n=======================================");
         System.out.println("TESTE 4 — Caso extremo (múltiplos buracos)");
