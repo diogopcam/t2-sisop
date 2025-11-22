@@ -3,12 +3,12 @@ package memory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Memoria {
+public class Memory {
 
     private List<Segmento> segmentos;
     private int tamanhoTotal;
 
-    public Memoria(int tamanhoTotal) {
+    public Memory(int tamanhoTotal) {
         this.tamanhoTotal = tamanhoTotal;
         this.segmentos = new ArrayList<>();
 
