@@ -1,13 +1,17 @@
 package memory;
-import memory.Politicas.*;
 import java.util.ArrayList;
 import java.util.List;
+import memory.Politicas.*;
 
 public class MemoryManager {
 
     private Memory memory;
     private Policy politica;
     private List<String> processosAlocados = new ArrayList<>();
+
+    public List<Segmento> getTodosSegmentos() {
+        return memory.getSegmentos();
+    }
 
     public MemoryManager(int tamanhoMemoria, String politicaNome) {
         this.memory = new Memory(tamanhoMemoria);
@@ -30,13 +34,16 @@ public class MemoryManager {
     }
 
     public void alocarProcesso(String id, int tamanho) {
-        List<Segmento> disponiveis = getSegmentosDisponiveis();
-        int index = politica.alocarNovoProcesso(disponiveis, tamanho);
+        // List<Segmento> disponiveis = getSegmentosDisponiveis();
+        // int index = politica.alocarNovoProcesso(disponiveis, tamanho);
+
+        List<Segmento> todosSegmentos = memory.getSegmentos();
+        int index = politica.alocarNovoProcesso(todosSegmentos, tamanho);
         
         if (index == -1) 
             System.out.println("\n(MM) ERRO: ESPAÇO INSUFICIENTE DE MEMORIA");
         else if (index >= 0) {
-            Segmento s = disponiveis.get(index);
+            Segmento s = todosSegmentos.get(index);
 
             if (s == null) {
                 System.out.println("\n(MM) ERRO: Segmento nulo retornado pela política de alocação.");
@@ -60,15 +67,15 @@ public class MemoryManager {
         }
     }
 
-    public List<Segmento> getSegmentosDisponiveis() {
-        List<Segmento> disponiveis = new ArrayList<>();
+    // public List<Segmento> getSegmentosDisponiveis() {
+    //     List<Segmento> disponiveis = new ArrayList<>();
         
-        for (Segmento s : memory.getSegmentos()) {
-            if (s.livre) disponiveis.add(s);
-        }
+    //     for (Segmento s : memory.getSegmentos()) {
+    //         if (s.livre) disponiveis.add(s);
+    //     }
 
-        return disponiveis;
-    }
+    //     return disponiveis;
+    // }
 
     public void desalocarProcesso(String id) {
         if (!processosAlocados.contains(id)) {

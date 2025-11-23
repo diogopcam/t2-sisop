@@ -7,6 +7,10 @@ public class Kernel {
     private MemoryManager memoryManager;
     private ArrayList<PCB> prontos = new ArrayList<>();
 
+    public MemoryManager getMemoryManager() {
+        return memoryManager;
+    }
+
     public Kernel(MemoryManager memoryManager) {
         System.out.println("\n(Kernel) INFO: Kernel iniciado.");
 

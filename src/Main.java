@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Scanner;
-
 import memory.*;
 
 public class Main {
@@ -62,6 +61,13 @@ public class Main {
             } else {
                 System.out.println("Instrução desconhecida: " + op + "\n");
             }
+
+            System.out.println("Estado da Memória:");
+    
+            Visualizacao.imprimirEstadoMemoria(kernel.getMemoryManager().getTodosSegmentos());
+            Visualizacao.imprimirBlocosLivres(kernel.getMemoryManager().getTodosSegmentos());
+            
+            System.out.println("------------------------------------------------\n");
 
             index++;
         }
